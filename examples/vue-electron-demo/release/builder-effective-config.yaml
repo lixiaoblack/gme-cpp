@@ -1,0 +1,14 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.example.gme-demo
+files:
+  - filter:
+      - dist/**/*
+mac:
+  target:
+    - dmg
+win:
+  target:
+    - nsis
+electronVersion: 29.4.6

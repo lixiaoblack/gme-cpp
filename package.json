@@ -1,0 +1,36 @@
+{
+  "name": "electron-gme-sdk",
+  "version": "1.0.0",
+  "description": "GME SDK for Electron",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rimraf build lib",
+    "configure": "node-gyp configure",
+    "build:addon": "node-gyp rebuild",
+    "build:ts": "tsc",
+    "build": "pnpm run clean && pnpm run configure && pnpm run build:addon && pnpm run build:ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "gypfile": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "node-gyp": "^10.0.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.2"
+  },
+  "files": [
+    "lib/**/*",
+    "sdk/**/*",
+    "binding.gyp",
+    "src/native/**/*",
+    "build/Release/*.node"
+  ]
+} 
