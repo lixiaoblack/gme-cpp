@@ -2,7 +2,7 @@
  * @Author: wanglx
  * @Date: 2025-04-06 09:31:42
  * @LastEditors: wanglx
- * @LastEditTime: 2025-04-06 10:07:20
+ * @LastEditTime: 2025-04-06 22:13:38
  * @Description:
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
@@ -10,6 +10,25 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import { release } from "node:os";
 import { join } from "node:path";
+import { spawn } from "node:child_process";
+
+// 设置控制台编码为 UTF-8
+if (process.platform === "win32") {
+  spawn("chcp", ["65001"], { shell: true });
+}
+
+// 添加日志处理
+ipcMain.on("log:debug", (event, ...args) => {
+  console.log("[Renderer Debug]", ...args);
+});
+
+ipcMain.on("log:info", (event, ...args) => {
+  console.log("[Renderer Info]", ...args);
+});
+
+ipcMain.on("log:error", (event, ...args) => {
+  console.error("[Renderer Error]", ...args);
+});
 
 // 使用 require 导入 GME SDK
 const GMEWrapper = require("electron-gme-sdk");
@@ -44,11 +63,12 @@ async function createWindow() {
       nodeIntegration: true,
       contextIsolation: true,
       sandbox: false,
+      webSecurity: false,
     },
   });
 
   if (!app.isPackaged) {
-    win.loadFile(join(process.env.DIST, "index.html"));
+    win.loadURL("http://localhost:5173");
     win.webContents.openDevTools();
   } else {
     win.loadFile(join(process.env.DIST, "index.html"));
@@ -70,18 +90,13 @@ app.on("activate", () => {
 });
 
 // GME 相关的 IPC 通信
-ipcMain.handle("gme:init", async () => {
+ipcMain.handle("gme:init", async (event, appId: string, userId: string) => {
   try {
-    console.log("Initializing GME with fixed config:", GME_CONFIG);
-    const result = await gme.init(GME_CONFIG.appId, GME_CONFIG.userId);
-    console.log("GME init result:", result);
+    const result = await gme.init(appId, userId);
     return result;
   } catch (error) {
-    console.error("GME init error:", error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : String(error),
-    };
+    console.error("Init error:", error);
+    return { success: false, error: error.message };
   }
 });
 
@@ -89,61 +104,71 @@ ipcMain.handle(
   "gme:enterRoom",
   async (event, roomId: string, openId: string) => {
     try {
-      console.log("Entering room with roomId:", roomId, "openId:", openId);
-      const result = await gme.enterRoom(String(roomId), String(openId));
-      console.log("Enter room result:", result);
+      const result = await gme.enterRoom(roomId, openId);
       return result;
     } catch (error) {
-      console.error("Enter room error:", error);
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : String(error),
-      };
+      console.error("EnterRoom error:", error);
+      return { success: false, error: error.message };
     }
   }
 );
 
 ipcMain.handle("gme:exitRoom", async () => {
   try {
-    console.log("Exiting room");
     const result = await gme.exitRoom();
-    console.log("Exit room result:", result);
     return result;
   } catch (error) {
-    console.error("Exit room error:", error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : String(error),
-    };
+    console.error("ExitRoom error:", error);
+    return { success: false, error: error.message };
   }
 });
 
 ipcMain.handle("gme:enableMic", async (event, enabled: boolean) => {
   try {
-    console.log("Setting mic enabled:", enabled);
     const result = await gme.enableMic(enabled);
-    console.log("Enable mic result:", result);
     return result;
   } catch (error) {
-    console.error("Enable mic error:", error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : String(error),
-    };
+    console.error("EnableMic error:", error);
+    return { success: false, error: error.message };
   }
 });
 
 ipcMain.handle("gme:enableSpeaker", async (event, enabled: boolean) => {
   try {
-    console.log("Setting speaker enabled:", enabled);
     const result = await gme.enableSpeaker(enabled);
-    console.log("Enable speaker result:", result);
     return result;
   } catch (error) {
-    console.error("Enable speaker error:", error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : String(error),
-    };
+    console.error("EnableSpeaker error:", error);
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("gme:getSpeakerList", async () => {
+  try {
+    const result = await gme.getSpeakerList();
+    return result;
+  } catch (error) {
+    console.error("GetSpeakerList error:", error);
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("gme:selectSpeakerDevice", async (event, deviceId: string) => {
+  try {
+    const result = await gme.selectSpeakerDevice(deviceId);
+    return result;
+  } catch (error) {
+    console.error("SelectSpeakerDevice error:", error);
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle("gme:getCurrentSpeakerDevice", async () => {
+  try {
+    const result = await gme.getCurrentSpeakerDevice();
+    return result;
+  } catch (error) {
+    console.error("GetCurrentSpeakerDevice error:", error);
+    return { success: false, error: error.message };
   }
 });

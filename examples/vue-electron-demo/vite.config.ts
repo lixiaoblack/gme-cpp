@@ -2,7 +2,7 @@
  * @Author: wanglx
  * @Date: 2025-04-06 09:31:09
  * @LastEditors: wanglx
- * @LastEditTime: 2025-04-06 09:40:25
+ * @LastEditTime: 2025-04-06 22:13:16
  * @Description:
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
@@ -19,6 +19,15 @@ export default defineConfig({
     outDir: "dist/renderer",
     emptyOutDir: true,
   },
+  server: {
+    port: 5173,
+    watch: {
+      usePolling: true,
+    },
+    hmr: {
+      overlay: false,
+    },
+  },
   plugins: [
     vue(),
     electron([
@@ -31,6 +40,11 @@ export default defineConfig({
               external: ["electron", "electron-gme-sdk", /\.node$/],
             },
           },
+          server: {
+            watch: {
+              usePolling: true,
+            },
+          },
         },
       },
       {
@@ -39,13 +53,20 @@ export default defineConfig({
           build: {
             outDir: "dist/electron/preload",
           },
+          server: {
+            watch: {
+              usePolling: true,
+            },
+          },
         },
         onstart(options) {
           options.reload();
         },
       },
     ]),
-    renderer(),
+    renderer({
+      nodeIntegration: true,
+    }),
   ],
   resolve: {
     alias: {

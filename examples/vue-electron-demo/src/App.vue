@@ -38,13 +38,47 @@
           inactive-text="扬声器关闭"
         />
       </el-form-item>
+      <el-form-item label="扬声器设备">
+        <el-select
+          v-model="form.selectedSpeaker"
+          placeholder="请选择扬声器设备"
+          @change="handleSpeakerDeviceChange"
+          :disabled="!initialized"
+        >
+          <el-option
+            v-for="device in speakerDevices"
+            :key="device.deviceId"
+            :label="device.deviceName"
+            :value="device.deviceId"
+          />
+        </el-select>
+        <el-button
+          type="primary"
+          size="small"
+          style="margin-left: 10px"
+          @click="refreshSpeakerDevices"
+          :disabled="!initialized"
+        >
+          刷新设备列表
+        </el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
+
+// 添加生命周期钩子
+onBeforeMount(() => {
+  console.log("Component before mount");
+});
+
+onMounted(() => {
+  console.log("Component mounted");
+  console.log("Window gmeApi:", window.gmeApi); // 检查 gmeApi 是否正确注入
+});
 
 declare global {
   interface Window {
@@ -54,35 +88,54 @@ declare global {
       exitRoom: () => Promise<any>;
       enableMic: (enabled: boolean) => Promise<any>;
       enableSpeaker: (enabled: boolean) => Promise<any>;
+      getSpeakerList: () => Promise<any>;
+      selectSpeakerDevice: (deviceId: string) => Promise<any>;
+      getCurrentSpeakerDevice: () => Promise<any>;
+    };
+    log: {
+      debug: (...args: any[]) => void;
+      info: (...args: any[]) => void;
+      error: (...args: any[]) => void;
     };
   }
 }
 
 const initialized = ref(false);
 const inRoom = ref(false);
+const speakerDevices = ref<Array<{ deviceId: string; deviceName: string }>>([]);
 
 const form = reactive({
   roomId: "",
   openId: "",
   micEnabled: false,
   speakerEnabled: false,
+  selectedSpeaker: "",
 });
 
 const handleInit = async () => {
+  window.log.info("handleInit called");
+
   if (!form.openId) {
+    window.log.info("openId is empty");
     ElMessage.warning("请输入用户ID");
     return;
   }
 
   try {
+    window.log.info("before init call");
     const result = await window.gmeApi.init("1600074451", form.openId);
+    window.log.info("init result:", result);
+
     if (result.success) {
       initialized.value = true;
       ElMessage.success("GME 初始化成功");
+      // 初始化成功后获取扬声器设备列表
+      await refreshSpeakerDevices();
     } else {
       ElMessage.error(`GME 初始化失败: ${result.error}`);
     }
   } catch (error) {
+    window.log.error("init error:", error);
     ElMessage.error(`发生错误: ${error}`);
   }
 };
@@ -148,6 +201,45 @@ const handleSpeakerToggle = async (enabled: boolean) => {
     }
   } catch (error) {
     form.speakerEnabled = !enabled;
+    ElMessage.error(`发生错误: ${error}`);
+  }
+};
+
+// 刷新扬声器设备列表
+const refreshSpeakerDevices = async () => {
+  try {
+    window.log.info("refreshSpeakerDevices: start");
+    const result = await window.gmeApi.getSpeakerList();
+    window.log.info("getSpeakerList result:", result);
+
+    if (result.success) {
+      speakerDevices.value = result.devices;
+      // 如果当前没有选中的设备，自动选择第一个设备
+      if (!form.selectedSpeaker && result.devices.length > 0) {
+        form.selectedSpeaker = result.devices[0].deviceId;
+        await handleSpeakerDeviceChange(form.selectedSpeaker);
+      }
+      ElMessage.success("获取扬声器列表成功");
+    } else {
+      window.log.error("Failed to get speaker list:", result.error);
+      ElMessage.error(`获取扬声器列表失败: ${result.error}`);
+    }
+  } catch (error) {
+    window.log.error("refreshSpeakerDevices error:", error);
+    ElMessage.error(`获取扬声器列表出错: ${error}`);
+  }
+};
+
+// 切换扬声器设备
+const handleSpeakerDeviceChange = async (deviceId: string) => {
+  try {
+    const result = await window.gmeApi.selectSpeakerDevice(deviceId);
+    if (result.success) {
+      ElMessage.success("切换扬声器设备成功");
+    } else {
+      ElMessage.error(`切换扬声器设备失败: ${result.error}`);
+    }
+  } catch (error) {
     ElMessage.error(`发生错误: ${error}`);
   }
 };

@@ -4,7 +4,7 @@
   "description": "GME SDK Demo",
   "main": "dist/electron/main/index.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "build": "vue-tsc && vite build && electron-builder",
     "preview": "vite preview"
   },

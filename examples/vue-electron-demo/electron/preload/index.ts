@@ -9,21 +9,59 @@
  */
 import { contextBridge, ipcRenderer } from "electron";
 
+// 添加日志功能
+const log = {
+  debug: (...args: any[]) => ipcRenderer.send("log:debug", ...args),
+  info: (...args: any[]) => ipcRenderer.send("log:info", ...args),
+  error: (...args: any[]) => ipcRenderer.send("log:error", ...args),
+};
+
 // 暴露安全的 API 到渲染进程
 contextBridge.exposeInMainWorld("gmeApi", {
-  init: async () => {
-    return await ipcRenderer.invoke("gme:init");
+  init: async (appId: string, userId: string) => {
+    const result = await ipcRenderer.invoke("gme:init", appId, userId);
+    log.info("init result:", result);
+    return result;
   },
   enterRoom: async (roomId: string, openId: string) => {
-    return await ipcRenderer.invoke("gme:enterRoom", roomId, openId);
+    const result = await ipcRenderer.invoke("gme:enterRoom", roomId, openId);
+    log.info("enterRoom result:", result);
+    return result;
   },
   exitRoom: async () => {
-    return await ipcRenderer.invoke("gme:exitRoom");
+    const result = await ipcRenderer.invoke("gme:exitRoom");
+    log.info("exitRoom result:", result);
+    return result;
   },
   enableMic: async (enabled: boolean) => {
-    return await ipcRenderer.invoke("gme:enableMic", enabled);
+    const result = await ipcRenderer.invoke("gme:enableMic", enabled);
+    log.info("enableMic result:", result);
+    return result;
   },
   enableSpeaker: async (enabled: boolean) => {
-    return await ipcRenderer.invoke("gme:enableSpeaker", enabled);
+    const result = await ipcRenderer.invoke("gme:enableSpeaker", enabled);
+    log.info("enableSpeaker result:", result);
+    return result;
+  },
+  getSpeakerList: async () => {
+    const result = await ipcRenderer.invoke("gme:getSpeakerList");
+    log.info("getSpeakerList result:", result);
+    return result;
+  },
+  selectSpeakerDevice: async (deviceId: string) => {
+    const result = await ipcRenderer.invoke(
+      "gme:selectSpeakerDevice",
+      deviceId
+    );
+    log.info("selectSpeakerDevice result:", result);
+    return result;
+  },
+  getCurrentSpeakerDevice: async () => {
+    const result = await ipcRenderer.invoke("gme:getCurrentSpeakerDevice");
+    log.info("getCurrentSpeakerDevice result:", result);
+    return result;
   },
 });
+
+// 暴露日志功能到渲染进程
+contextBridge.exposeInMainWorld("log", log);
