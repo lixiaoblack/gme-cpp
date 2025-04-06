@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7BD3EDC8-03D4-46CB-B5EF-AD9B396AB13B}</ProjectGuid>
+    <RootNamespace>GMEWindowsAPIExample</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <Keyword>MFCProj</Keyword>
+    <ProjectName>GMEWindowsAPIExample</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>..\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>SDK\libs\win\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IntDir>..\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>SDK\libs\win\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>..\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>SDK\libs\win\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IntDir>..\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <OutDir>SDK\libs\win\$(Platform)\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Winhttp.lib;%(AdditionalDependencies);gmesdk.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>xcopy /s /y /f /c $(ProjectDir)\YsdSDK\include $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.dll $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.lib $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\sdk\api\gme\cpp\*.h  $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\GMESDK.lib  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\GMESDK.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\txffmpeg.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\txsoundtouch.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+set %ERRORLEVEL%=0</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Winhttp.lib;%(AdditionalDependencies);gmesdk.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>xcopy /s /y /f /c $(ProjectDir)\YsdSDK\include $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.dll $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.lib $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\sdk\api\gme\cpp\*.h  $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Debug-winos\GMESDK.lib  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Debug-winos\GMESDK.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Debug-winos\txffmpeg.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Debug-winos\txsoundtouch.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+set %ERRORLEVEL%=0</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Winhttp.lib;%(AdditionalDependencies);gmesdk.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>xcopy /s /y /f /c $(ProjectDir)\YsdSDK\include $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.dll $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.lib $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\sdk\api\gme\cpp\*.h  $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\GMESDK.lib  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\GMESDK.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\txffmpeg.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x86\Release-winos\txsoundtouch.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+set %ERRORLEVEL%=0</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Winhttp.lib;%(AdditionalDependencies);gmesdk.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir)</AdditionalLibraryDirectories>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0409</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>xcopy /s /y /f /c $(ProjectDir)\YsdSDK\include $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.dll $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)\YsdSDK\libs\Win\$(Platform)\$(Configuration)\*.lib $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\sdk\api\gme\cpp\*.h  $(ProjectDir)SDK\include\
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Release-winos\GMESDK.lib  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Release-winos\GMESDK.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Release-winos\txffmpeg.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+xcopy /s /y /f /c $(ProjectDir)..\..\..\..\..\out\win-x64\Release-winos\txsoundtouch.dll  $(ProjectDir)SDK\libs\win\$(Platform)\$(Configuration)
+
+set %ERRORLEVEL%=0</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EnginePollHelper.h" />
+    <ClInclude Include="gci-json.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SDK\include\av_audio_ctrl.h" />
+    <ClInclude Include="SDK\include\av_audio_effect_ctrl.h" />
+    <ClInclude Include="SDK\include\av_error.h" />
+    <ClInclude Include="SDK\include\av_room.h" />
+    <ClInclude Include="SDK\include\av_type.h" />
+    <ClInclude Include="SDK\include\tmg_sdk.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="TMGPTTDlg.h" />
+    <ClInclude Include="TMGRealTimeAudioDlg.h" />
+    <ClInclude Include="GMEWindowsAPIExample.h" />
+    <ClInclude Include="GMEWindowsAPIExampleDlg.h" />
+    <ClInclude Include="Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EnginePollHelper.cpp" />
+    <ClCompile Include="gci-json.cc" />
+    <ClCompile Include="jsoncpp\json_reader.cpp" />
+    <ClCompile Include="jsoncpp\json_value.cpp" />
+    <ClCompile Include="jsoncpp\json_writer.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TMGPTTDlg.cpp" />
+    <ClCompile Include="TMGRealTimeAudioDlg.cpp" />
+    <ClCompile Include="GMEWindowsAPIExample.cpp" />
+    <ClCompile Include="GMEWindowsAPIExampleDlg.cpp" />
+    <ClCompile Include="Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GMEWindowsAPIExample.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\GMEWindowsAPIExample.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\GMEWindowsAPIExample.ico" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="TMGSDK_For_Audio_ApiExample.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

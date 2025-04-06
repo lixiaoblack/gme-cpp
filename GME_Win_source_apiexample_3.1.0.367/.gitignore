@@ -1,0 +1,7 @@
+#############################################
+x64/Debug
+x64/Release
+GMEWindowsAPIExample/SDK/libs/win/Win32/Debug
+GMEWindowsAPIExample/SDK/libs/win/Win32/Release
+GMEWindowsAPIExample/SDK/libs/win/x64/Debug
+GMEWindowsAPIExample/SDK/libs/win/x64/Release

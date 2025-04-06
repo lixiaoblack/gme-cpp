@@ -1,1 +1,0 @@
-cmd_Release/gme_native.node := c++ -bundle -undefined dynamic_lookup -Wl,-search_paths_first -mmacosx-version-min=10.15 -arch arm64 -L./Release -stdlib=libc++  -o Release/gme_native.node Release/obj.target/gme_native/src/native/gme.o Release/nothing.a 

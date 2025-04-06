@@ -3,9 +3,8 @@
     "target_name": "gme_native",
     "sources": [ "src/native/gme.cpp" ],
     "include_dirs": [
-      "<!@(node -p \"require('node-addon-api').include_dir\")",
-      "<!(node -p \"require('node-addon-api').include\")",
-      "./GME_Win_sdk_3.1.0.367/include"
+      "<!@(node -p \"require('node-addon-api').include\")",
+      "<(module_root_dir)/GME_Win_sdk_3.1.0.367/include"
     ],
     "dependencies": [
       "<!(node -p \"require('node-addon-api').gyp\")"
@@ -29,14 +28,14 @@
     "conditions": [
       ["OS==\"win\"", {
         "libraries": [
-          "../GME_Win_sdk_3.1.0.367/lib/x64/GMESDK.lib"
+          "<(module_root_dir)/GME_Win_sdk_3.1.0.367/lib/x64/GMESDK.lib"
         ],
         "copies": [{
           "destination": "<(PRODUCT_DIR)",
           "files": [
-            "./GME_Win_sdk_3.1.0.367/lib/x64/GMESDK.dll",
-            "./GME_Win_sdk_3.1.0.367/lib/x64/txffmpeg.dll",
-            "./GME_Win_sdk_3.1.0.367/lib/x64/txsoundtouch.dll"
+            "<(module_root_dir)/GME_Win_sdk_3.1.0.367/lib/x64/GMESDK.dll",
+            "<(module_root_dir)/GME_Win_sdk_3.1.0.367/lib/x64/txffmpeg.dll",
+            "<(module_root_dir)/GME_Win_sdk_3.1.0.367/lib/x64/txsoundtouch.dll"
           ]
         }]
       }],

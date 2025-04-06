@@ -1,0 +1,5 @@
+{
+  "terminal.integrated.shellArgs.windows": ["/k", "chcp 65001"],
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "files.eol": "\n"
+}

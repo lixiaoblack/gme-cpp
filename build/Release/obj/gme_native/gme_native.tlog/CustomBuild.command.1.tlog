@@ -1,0 +1,9 @@
+^C:\USERS\15029\DESKTOP\XHXHX\GME-CPP\GME_WIN_SDK_3.1.0.367\LIB\X64\GMESDK.DLL
+call mkdir "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\" 2>nul & set ERRORLEVEL=0 & copy /Y "C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\GMESDK.dll" "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\GMESDK.dll"
+if %errorlevel% neq 0 exit /b %errorlevel%
+^C:\USERS\15029\DESKTOP\XHXHX\GME-CPP\GME_WIN_SDK_3.1.0.367\LIB\X64\TXFFMPEG.DLL
+call mkdir "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\" 2>nul & set ERRORLEVEL=0 & copy /Y "C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txffmpeg.dll" "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\txffmpeg.dll"
+if %errorlevel% neq 0 exit /b %errorlevel%
+^C:\USERS\15029\DESKTOP\XHXHX\GME-CPP\GME_WIN_SDK_3.1.0.367\LIB\X64\TXSOUNDTOUCH.DLL
+call mkdir "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\" 2>nul & set ERRORLEVEL=0 & copy /Y "C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txsoundtouch.dll" "C:\Users\15029\Desktop\xhxhx\gme-cpp\build\Release\txsoundtouch.dll"
+if %errorlevel% neq 0 exit /b %errorlevel%

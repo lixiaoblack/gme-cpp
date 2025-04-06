@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8EDFE0E8-E68E-E87E-6D35-7F121AC47D2E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>gme_native</RootNamespace>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+  </PropertyGroup>
+  <PropertyGroup Label="Locals">
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props"/>
+  <ImportGroup Label="ExtensionSettings"/>
+  <ImportGroup Label="PropertySheets">
+    <Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props"/>
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros"/>
+  <PropertyGroup>
+    <ExecutablePath>$(ExecutablePath);$(MSBuildProjectDirectory)\..\bin\;$(MSBuildProjectDirectory)\..\bin\</ExecutablePath>
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+    <IntDir>$(Configuration)\obj\$(ProjectName)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.node</TargetExt>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.node</TargetExt>
+    <TargetName>$(ProjectName)</TargetName>
+    <TargetPath>$(OutDir)\$(ProjectName).node</TargetPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\include\node;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\src;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\config;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\openssl\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\uv\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\zlib;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\v8\include;C:\Users\15029\Desktop\xhxhx\gme-cpp\node_modules\.pnpm\node-addon-api@7.1.1\node_modules\node-addon-api;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>false</OmitFramePointers>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=gme_native;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;NAPI_DISABLE_CPP_EXCEPTIONS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\15029\\AppData\\Local\\node-gyp\\Cache\\20.18.2\\x64\\node.lib&quot;;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\GMESDK.lib</AdditionalDependencies>
+      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetExt>.node</TargetExt>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\include\node;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\src;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\config;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\openssl\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\uv\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\zlib;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\v8\include;C:\Users\15029\Desktop\xhxhx\gme-cpp\node_modules\.pnpm\node-addon-api@7.1.1\node_modules\node-addon-api;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=gme_native;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;NAPI_DISABLE_CPP_EXCEPTIONS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;DEBUG;_DEBUG;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\include\node;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\src;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\config;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\openssl\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\uv\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\zlib;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\v8\include;C:\Users\15029\Desktop\xhxhx\gme-cpp\node_modules\.pnpm\node-addon-api@7.1.1\node_modules\node-addon-api;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zc:__cplusplus -std:c++17 %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <DisableSpecificWarnings>4351;4355;4800;4251;4275;4244;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OmitFramePointers>true</OmitFramePointers>
+      <Optimization>Full</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=gme_native;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;NAPI_DISABLE_CPP_EXCEPTIONS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>false</RuntimeTypeInfo>
+      <StringPooling>true</StringPooling>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <WarningLevel>Level3</WarningLevel>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+    </ClCompile>
+    <Lib>
+      <AdditionalOptions>/LTCG:INCREMENTAL %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;DelayImp.lib;&quot;C:\\Users\\15029\\AppData\\Local\\node-gyp\\Cache\\20.18.2\\x64\\node.lib&quot;;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\GMESDK.lib</AdditionalDependencies>
+      <AdditionalOptions>/LTCG:INCREMENTAL /ignore:4199 %(AdditionalOptions)</AdditionalOptions>
+      <DelayLoadDLLs>node.exe;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <OutputFile>$(OutDir)$(ProjectName).node</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetExt>.node</TargetExt>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\include\node;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\src;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\config;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\openssl\openssl\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\uv\include;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\zlib;C:\Users\15029\AppData\Local\node-gyp\Cache\20.18.2\deps\v8\include;C:\Users\15029\Desktop\xhxhx\gme-cpp\node_modules\.pnpm\node-addon-api@7.1.1\node_modules\node-addon-api;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NODE_GYP_MODULE_NAME=gme_native;USING_UV_SHARED=1;USING_V8_SHARED=1;V8_DEPRECATION_WARNINGS=1;_GLIBCXX_USE_CXX11_ABI=1;WIN32;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_HAS_EXCEPTIONS=0;OPENSSL_NO_PINSHARED;OPENSSL_THREADS;NAPI_DISABLE_CPP_EXCEPTIONS;BUILDING_NODE_EXTENSION;HOST_BINARY=&quot;node.exe&quot;;%(PreprocessorDefinitions);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\binding.gyp"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\native\gme.cpp">
+      <ObjectFileName>$(IntDir)\src\native\gme.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\Users\15029\Desktop\xhxhx\gme-cpp\node_modules\.pnpm\node-gyp@10.3.1\node_modules\node-gyp\src\win_delay_load_hook.cc"/>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\GMESDK.dll">
+      <FileType>Document</FileType>
+      <Command>call mkdir &quot;$(OutDir)&quot; 2&gt;nul &amp; set ERRORLEVEL=0 &amp; copy /Y &quot;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\GMESDK.dll&quot; &quot;$(OutDir)GMESDK.dll&quot;&#xD;&#xA;if %errorlevel% neq 0 exit /b %errorlevel%</Command>
+      <Message>Copying C:\Users\15029\Desktop\xhxhx\gme-cpp/GME_Win_sdk_3.1.0.367/lib/x64/GMESDK.dll to $(OutDir)</Message>
+      <Outputs>$(OutDir)\GMESDK.dll</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txffmpeg.dll">
+      <FileType>Document</FileType>
+      <Command>call mkdir &quot;$(OutDir)&quot; 2&gt;nul &amp; set ERRORLEVEL=0 &amp; copy /Y &quot;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txffmpeg.dll&quot; &quot;$(OutDir)txffmpeg.dll&quot;&#xD;&#xA;if %errorlevel% neq 0 exit /b %errorlevel%</Command>
+      <Message>Copying C:\Users\15029\Desktop\xhxhx\gme-cpp/GME_Win_sdk_3.1.0.367/lib/x64/txffmpeg.dll to $(OutDir)</Message>
+      <Outputs>$(OutDir)\txffmpeg.dll</Outputs>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txsoundtouch.dll">
+      <FileType>Document</FileType>
+      <Command>call mkdir &quot;$(OutDir)&quot; 2&gt;nul &amp; set ERRORLEVEL=0 &amp; copy /Y &quot;C:\Users\15029\Desktop\xhxhx\gme-cpp\GME_Win_sdk_3.1.0.367\lib\x64\txsoundtouch.dll&quot; &quot;$(OutDir)txsoundtouch.dll&quot;&#xD;&#xA;if %errorlevel% neq 0 exit /b %errorlevel%</Command>
+      <Message>Copying C:\Users\15029\Desktop\xhxhx\gme-cpp/GME_Win_sdk_3.1.0.367/lib/x64/txsoundtouch.dll to $(OutDir)</Message>
+      <Outputs>$(OutDir)\txsoundtouch.dll</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="node_modules\.pnpm\node-addon-api@7.1.1\node_modules\node-addon-api\nothing.vcxproj">
+      <Project>{6C14D9A8-02B4-31AF-F7D5-B9BFFBA23776}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets"/>
+  <ImportGroup Label="ExtensionTargets"/>
+</Project>
