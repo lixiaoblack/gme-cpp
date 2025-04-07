@@ -7,10 +7,14 @@
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
  */
-export { GME } from "./gme";
-export * from "./types";
+export { GME } from "./gme.js";
+export * from "./types.js";
 
-const addon = require("bindings")("gme_native");
+// ESM兼容的导入和导出
+import _bindings from "bindings";
+const bindings = _bindings;
 
-// 导出 GMEWrapper 类
-module.exports = addon.GMEWrapper;
+const GMEWrapper = bindings("gme_native");
+
+export { GMEWrapper };
+export default GMEWrapper;

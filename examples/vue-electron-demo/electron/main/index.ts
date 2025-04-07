@@ -2,7 +2,7 @@
  * @Author: wanglx
  * @Date: 2025-04-06 09:31:42
  * @LastEditors: wanglx
- * @LastEditTime: 2025-04-06 22:13:38
+ * @LastEditTime: 2025-04-07 20:56:05
  * @Description:
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
@@ -88,7 +88,6 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
 // GME 相关的 IPC 通信
 ipcMain.handle("gme:init", async (event, appId: string, userId: string) => {
   try {

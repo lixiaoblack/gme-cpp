@@ -1,5 +1,8 @@
-import { GMEConfig, GMEInstance, GMEResult, GMEVoiceResult } from "./types";
-const native = require("bindings")("gme_native");
+import { GMEConfig, GMEInstance, GMEResult, GMEVoiceResult } from "./types.js";
+import _bindings from "bindings";
+const bindings = _bindings;
+
+const native = bindings("gme_native");
 
 export class GME implements GMEInstance {
   private wrapper: any;

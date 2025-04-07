@@ -1,41 +1,45 @@
-const fs = require("fs");
-const path = require("path");
+import { existsSync, mkdirSync, readdirSync, copyFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
-const sdkPath = path.join(__dirname, "..", "GME_Win_sdk_3.1.0.367");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const sdkPath = join(__dirname, "..", "GME_Win_sdk_3.1.0.367");
 
 // 如果 SDK 目录不存在，则创建它
-if (!fs.existsSync(sdkPath)) {
-  fs.mkdirSync(sdkPath, { recursive: true });
+if (!existsSync(sdkPath)) {
+  mkdirSync(sdkPath, { recursive: true });
 }
 
 // 复制 SDK 文件
 const copyDir = (src, dest) => {
-  if (!fs.existsSync(src)) {
+  if (!existsSync(src)) {
     console.error(`Source directory ${src} does not exist`);
     return;
   }
 
-  if (!fs.existsSync(dest)) {
-    fs.mkdirSync(dest, { recursive: true });
+  if (!existsSync(dest)) {
+    mkdirSync(dest, { recursive: true });
   }
 
-  const entries = fs.readdirSync(src, { withFileTypes: true });
+  const entries = readdirSync(src, { withFileTypes: true });
 
   for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
+    const srcPath = join(src, entry.name);
+    const destPath = join(dest, entry.name);
 
     if (entry.isDirectory()) {
       copyDir(srcPath, destPath);
     } else {
-      fs.copyFileSync(srcPath, destPath);
+      copyFileSync(srcPath, destPath);
     }
   }
 };
 
 // 复制 SDK 文件
-const sdkSrcPath = path.join(__dirname, "..", "..", "GME_Win_sdk_3.1.0.367");
-if (fs.existsSync(sdkSrcPath)) {
+const sdkSrcPath = join(__dirname, "..", "..", "GME_Win_sdk_3.1.0.367");
+if (existsSync(sdkSrcPath)) {
   copyDir(sdkSrcPath, sdkPath);
   console.log("SDK files copied successfully");
 } else {

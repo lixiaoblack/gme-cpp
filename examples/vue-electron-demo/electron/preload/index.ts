@@ -2,7 +2,7 @@
  * @Author: wanglx
  * @Date: 2025-04-06 09:32:13
  * @LastEditors: wanglx
- * @LastEditTime: 2025-04-06 09:58:32
+ * @LastEditTime: 2025-04-07 20:56:13
  * @Description:
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
@@ -62,6 +62,5 @@ contextBridge.exposeInMainWorld("gmeApi", {
     return result;
   },
 });
-
 // 暴露日志功能到渲染进程
 contextBridge.exposeInMainWorld("log", log);

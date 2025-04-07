@@ -4,6 +4,7 @@
   "description": "GME SDK for Electron",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "type": "module",
   "scripts": {
     "clean": "rimraf build lib",
     "configure": "node-gyp configure",
