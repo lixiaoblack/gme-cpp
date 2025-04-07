@@ -1,8 +1,34 @@
 import { GMEConfig, GMEInstance, GMEResult, GMEVoiceResult } from "./types.js";
-import _bindings from "bindings";
-const bindings = _bindings;
+import { join } from "path";
 
-const native = bindings("gme_native");
+interface NativeModule {
+  GMEWrapper: new () => any;
+}
+
+// 在 Electron 环境中加载原生模块
+let native: NativeModule;
+try {
+  // 尝试从 node_modules 中加载
+  const modulePath = join(
+    process.cwd(),
+    "node_modules",
+    "electron-gme-sdk",
+    "build",
+    "Release",
+    "gme_native"
+  );
+  console.log("Trying to load native module from:", modulePath);
+  native = require(modulePath);
+} catch (error) {
+  console.error(
+    "Failed to load from node_modules, trying relative path:",
+    error
+  );
+  // 如果失败，尝试从相对路径加载
+  const relativePath = join(__dirname, "..", "build", "Release", "gme_native");
+  console.log("Trying relative path:", relativePath);
+  native = require(relativePath);
+}
 
 export class GME implements GMEInstance {
   private wrapper: any;

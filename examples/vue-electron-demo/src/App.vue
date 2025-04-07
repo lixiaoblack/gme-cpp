@@ -69,6 +69,10 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted, onBeforeMount } from "vue";
 import { ElMessage } from "element-plus";
+import GMEWrapper from "electron-gme-sdk";
+
+// 创建 GME 实例
+const gme = new GMEWrapper();
 
 // 添加生命周期钩子
 onBeforeMount(() => {
@@ -77,28 +81,8 @@ onBeforeMount(() => {
 
 onMounted(() => {
   console.log("Component mounted");
-  console.log("Window gmeApi:", window.gmeApi); // 检查 gmeApi 是否正确注入
+  console.log("GME instance:", gme);
 });
-
-declare global {
-  interface Window {
-    gmeApi: {
-      init: (appId: string, userId: string) => Promise<any>;
-      enterRoom: (roomId: string, openId: string) => Promise<any>;
-      exitRoom: () => Promise<any>;
-      enableMic: (enabled: boolean) => Promise<any>;
-      enableSpeaker: (enabled: boolean) => Promise<any>;
-      getSpeakerList: () => Promise<any>;
-      selectSpeakerDevice: (deviceId: string) => Promise<any>;
-      getCurrentSpeakerDevice: () => Promise<any>;
-    };
-    log: {
-      debug: (...args: any[]) => void;
-      info: (...args: any[]) => void;
-      error: (...args: any[]) => void;
-    };
-  }
-}
 
 const initialized = ref(false);
 const inRoom = ref(false);
@@ -113,18 +97,18 @@ const form = reactive({
 });
 
 const handleInit = async () => {
-  window.log.info("handleInit called");
+  console.log("handleInit called");
 
   if (!form.openId) {
-    window.log.info("openId is empty");
+    console.log("openId is empty");
     ElMessage.warning("请输入用户ID");
     return;
   }
 
   try {
-    window.log.info("before init call");
-    const result = await window.gmeApi.init("1600074451", form.openId);
-    window.log.info("init result:", result);
+    console.log("before init call");
+    const result = await gme.init("1600074451", form.openId);
+    console.log("init result:", result);
 
     if (result.success) {
       initialized.value = true;
@@ -135,7 +119,7 @@ const handleInit = async () => {
       ElMessage.error(`GME 初始化失败: ${result.error}`);
     }
   } catch (error) {
-    window.log.error("init error:", error);
+    console.error("init error:", error);
     ElMessage.error(`发生错误: ${error}`);
   }
 };
@@ -147,7 +131,7 @@ const handleEnterRoom = async () => {
   }
 
   try {
-    const result = await window.gmeApi.enterRoom(form.roomId, form.openId);
+    const result = await gme.enterRoom(form.roomId, form.openId);
     if (result.success) {
       inRoom.value = true;
       ElMessage.success("成功进入房间");
@@ -161,7 +145,7 @@ const handleEnterRoom = async () => {
 
 const handleExitRoom = async () => {
   try {
-    const result = await window.gmeApi.exitRoom();
+    const result = await gme.exitRoom();
     if (result.success) {
       inRoom.value = false;
       form.micEnabled = false;
@@ -177,7 +161,7 @@ const handleExitRoom = async () => {
 
 const handleMicToggle = async (enabled: boolean) => {
   try {
-    const result = await window.gmeApi.enableMic(enabled);
+    const result = await gme.enableMic(enabled);
     if (result.success) {
       ElMessage.success(`麦克风${enabled ? "开启" : "关闭"}成功`);
     } else {
@@ -192,7 +176,7 @@ const handleMicToggle = async (enabled: boolean) => {
 
 const handleSpeakerToggle = async (enabled: boolean) => {
   try {
-    const result = await window.gmeApi.enableSpeaker(enabled);
+    const result = await gme.enableSpeaker(enabled);
     if (result.success) {
       ElMessage.success(`扬声器${enabled ? "开启" : "关闭"}成功`);
     } else {
@@ -205,39 +189,34 @@ const handleSpeakerToggle = async (enabled: boolean) => {
   }
 };
 
-// 刷新扬声器设备列表
 const refreshSpeakerDevices = async () => {
   try {
-    window.log.info("refreshSpeakerDevices: start");
-    const result = await window.gmeApi.getSpeakerList();
-    window.log.info("getSpeakerList result:", result);
+    console.log("Refreshing speaker devices...");
+    const result = await gme.getSpeakerList();
+    console.log("Speaker list result:", result);
 
-    if (result.success) {
+    if (result.success && result.devices) {
       speakerDevices.value = result.devices;
-      // 如果当前没有选中的设备，自动选择第一个设备
-      if (!form.selectedSpeaker && result.devices.length > 0) {
+      if (result.devices.length > 0 && !form.selectedSpeaker) {
         form.selectedSpeaker = result.devices[0].deviceId;
         await handleSpeakerDeviceChange(form.selectedSpeaker);
       }
-      ElMessage.success("获取扬声器列表成功");
     } else {
-      window.log.error("Failed to get speaker list:", result.error);
       ElMessage.error(`获取扬声器列表失败: ${result.error}`);
     }
   } catch (error) {
-    window.log.error("refreshSpeakerDevices error:", error);
-    ElMessage.error(`获取扬声器列表出错: ${error}`);
+    console.error("Error refreshing speaker devices:", error);
+    ElMessage.error(`发生错误: ${error}`);
   }
 };
 
-// 切换扬声器设备
 const handleSpeakerDeviceChange = async (deviceId: string) => {
   try {
-    const result = await window.gmeApi.selectSpeakerDevice(deviceId);
+    const result = await gme.selectSpeakerDevice(deviceId);
     if (result.success) {
-      ElMessage.success("切换扬声器设备成功");
+      ElMessage.success("切换扬声器成功");
     } else {
-      ElMessage.error(`切换扬声器设备失败: ${result.error}`);
+      ElMessage.error(`切换扬声器失败: ${result.error}`);
     }
   } catch (error) {
     ElMessage.error(`发生错误: ${error}`);

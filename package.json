@@ -2,9 +2,17 @@
   "name": "electron-gme-sdk",
   "version": "1.0.0",
   "description": "GME SDK for Electron",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "./lib/index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "default": "./lib/index.js"
+    }
+  },
   "scripts": {
     "clean": "rimraf build lib",
     "configure": "node-gyp configure",
@@ -12,9 +20,17 @@
     "build:ts": "tsc",
     "build": "pnpm run clean && pnpm run configure && pnpm run build:addon && pnpm run build:ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "node scripts/copy-sdk.js"
+    "prepare": "node scripts/copy-sdk.js",
+    "install": "node-gyp rebuild"
   },
   "gypfile": true,
+  "binary": {
+    "module_name": "gme_native",
+    "module_path": "./build/Release",
+    "host": "https://github.com/user/electron-gme-sdk/releases/download/",
+    "remote_path": "./build/Release",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -32,7 +48,7 @@
     "lib/**/*",
     "GME_Win_sdk_3.1.0.367/**/*",
     "binding.gyp",
-    "src/native/**/*",
+    "src/**/*",
     "build/Release/*.node",
     "build/Release/*.dll"
   ]

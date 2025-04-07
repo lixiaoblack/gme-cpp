@@ -2,7 +2,7 @@
  * @Author: wanglx
  * @Date: 2025-04-06 09:31:09
  * @LastEditors: wanglx
- * @LastEditTime: 2025-04-06 22:13:16
+ * @LastEditTime: 2025-04-07 21:27:06
  * @Description:
  *
  * Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
@@ -18,6 +18,9 @@ export default defineConfig({
   build: {
     outDir: "dist/renderer",
     emptyOutDir: true,
+    rollupOptions: {
+      external: [/\.node$/],
+    },
   },
   server: {
     port: 5173,
@@ -37,7 +40,7 @@ export default defineConfig({
           build: {
             outDir: "dist/electron/main",
             rollupOptions: {
-              external: ["electron", "electron-gme-sdk", /\.node$/],
+              external: ["electron", /\.node$/],
             },
           },
           server: {
@@ -45,28 +48,10 @@ export default defineConfig({
               usePolling: true,
             },
           },
-        },
-      },
-      {
-        entry: "electron/preload/index.ts",
-        vite: {
-          build: {
-            outDir: "dist/electron/preload",
-          },
-          server: {
-            watch: {
-              usePolling: true,
-            },
-          },
-        },
-        onstart(options) {
-          options.reload();
         },
       },
     ]),
-    renderer({
-      nodeIntegration: true,
-    }),
+    renderer(),
   ],
   resolve: {
     alias: {

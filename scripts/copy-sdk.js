@@ -1,3 +1,12 @@
+/*
+ * @Author: wanglx
+ * @Date: 2025-04-06 20:44:21
+ * @LastEditors: wanglx
+ * @LastEditTime: 2025-04-07 21:13:15
+ * @Description:
+ *
+ * @Copyright (c) 2025 by ${git_name_email}, All Rights Reserved.
+ */
 import { existsSync, mkdirSync, readdirSync, copyFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
